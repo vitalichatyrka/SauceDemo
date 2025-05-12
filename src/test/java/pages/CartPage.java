@@ -47,7 +47,8 @@ public class CartPage extends BasePage {
                                         "*[@class = 'inventory_item_price']", product)))
                 .getText().replace("$", ""));
     }
-    public void openCheckoutInformationPage(){
+
+    public void openCheckoutInformationPage() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 }

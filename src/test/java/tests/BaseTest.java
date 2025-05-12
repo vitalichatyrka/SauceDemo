@@ -29,14 +29,14 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() {
-            options = new ChromeOptions();
-            options.setExperimentalOption("prefs", Map.of(
-                    "credentials_enable_service", false,
-                    "profile.password_manager_enabled", false
-            ));
-            options.addArguments("--disable-features=PasswordManagerEnableLeakDetection,AutofillServerCommunication,PasswordCheck");
-            options.addArguments("--disable-blink-features=PasswordCredential,CredentialManagerAPI");
-            driver = new ChromeDriver(options);
+        options = new ChromeOptions();
+        options.setExperimentalOption("prefs", Map.of(
+                "credentials_enable_service", false,
+                "profile.password_manager_enabled", false
+        ));
+        options.addArguments("--disable-features=PasswordManagerEnableLeakDetection,AutofillServerCommunication,PasswordCheck");
+        options.addArguments("--disable-blink-features=PasswordCredential,CredentialManagerAPI");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         softAssert = new SoftAssert();

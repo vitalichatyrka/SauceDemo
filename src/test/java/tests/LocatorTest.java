@@ -18,7 +18,7 @@ public class LocatorTest extends BaseTest {
         driver.findElement(By.className("error-message-container"));
         driver.findElement(By.tagName("div"));
         driver.findElement(By.className("login_logo"));
-        loginPage.login("standard_user","secret_sauce");
+        loginPage.login("standard_user", "secret_sauce");
         assertTrue(driver.findElement(By.linkText("Sauce Labs Backpack")).isDisplayed());
         assertTrue(driver.findElement(By.partialLinkText("Sauce Labs")).isDisplayed());
         assertTrue(driver.findElement(By.xpath(

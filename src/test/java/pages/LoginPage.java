@@ -6,25 +6,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage (WebDriver driver) {
+    private final By USER_NAME_FIELD = By.id("user-name"),
+            PASSWORD_FIELD = By.id("password"),
+            LOGIN_BUTTON = By.id("login-button"),
+            ERROR_MESSAGE = By.xpath("//h3[@data-test='error']");
+
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
-        private final By USER_NAME_FIELD = By.id("user-name"),
-                PASSWORD_FIELD = By.id("password"),
-                LOGIN_BUTTON = By.id("login-button"),
-                ERROR_MESSAGE = By.xpath("//h3[@data-test='error']");
 
-        public void open() {
-            driver.get(BASE_URL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
-        }
-        public void login(String user, String password) {
-            driver.findElement(USER_NAME_FIELD).sendKeys(user);
-            driver.findElement(PASSWORD_FIELD).sendKeys(password);
-            driver.findElement(LOGIN_BUTTON).click();
-        }
-        public String getErrorMessage() {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
-            return driver.findElement(ERROR_MESSAGE).getText();
+    public void open() {
+        driver.get(BASE_URL);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+    }
+
+    public void login(String user, String password) {
+        driver.findElement(USER_NAME_FIELD).sendKeys(user);
+        driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        driver.findElement(LOGIN_BUTTON).click();
+    }
+
+    public String getErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

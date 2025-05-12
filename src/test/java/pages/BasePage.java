@@ -5,11 +5,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public abstract class  BasePage {
+public abstract class BasePage {
+    public static final String BASE_URL = "https://www.saucedemo.com/";
     public WebDriver driver;
     WebDriverWait wait;
-
-    public static final String BASE_URL= "https://www.saucedemo.com/";
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

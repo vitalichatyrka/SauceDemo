@@ -20,6 +20,4 @@ public class CheckoutOverviewPage extends BasePage {
     public boolean isTitleCorrect() {
         return getPageTitle().equals(NAME_OF_TITLE_OF_CHECKOUT_OVERVIEW_PAGE);
     }
-
-
 }
