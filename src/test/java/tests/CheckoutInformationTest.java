@@ -3,6 +3,7 @@ package tests;
 import org.testng.annotations.Test;
 import pages.config.Credentials;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class CheckoutInformationTest extends BaseTest {
@@ -31,7 +32,7 @@ public class CheckoutInformationTest extends BaseTest {
         checkoutInformationPage.enterLastName(Credentials.getLastName());
         checkoutInformationPage.enterPostalCode(Credentials.getPostalCode());
         checkoutInformationPage.clickContinueButton();
-        softAssert.assertEquals(checkoutInformationPage.getErrorMessage(),
+        assertEquals(checkoutInformationPage.getErrorMessage(),
                 "Error: First Name is required");
     }
 
@@ -45,7 +46,7 @@ public class CheckoutInformationTest extends BaseTest {
         checkoutInformationPage.enterFirstName(Credentials.getFirstName());
         checkoutInformationPage.enterPostalCode(Credentials.getPostalCode());
         checkoutInformationPage.clickContinueButton();
-        softAssert.assertEquals(checkoutInformationPage.getErrorMessage(),
+        assertEquals(checkoutInformationPage.getErrorMessage(),
                 "Error: Last Name is required");
     }
 
@@ -59,7 +60,7 @@ public class CheckoutInformationTest extends BaseTest {
         checkoutInformationPage.enterFirstName(Credentials.getFirstName());
         checkoutInformationPage.enterLastName(Credentials.getLastName());
         checkoutInformationPage.clickContinueButton();
-        softAssert.assertEquals(checkoutInformationPage.getErrorMessage(),
+        assertEquals(checkoutInformationPage.getErrorMessage(),
                 "Error: Postal Code is required");
     }
 

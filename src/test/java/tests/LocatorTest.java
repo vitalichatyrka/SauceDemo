@@ -38,5 +38,6 @@ public class LocatorTest extends BaseTest {
         for (WebElement socialMediaButton : socialMediaButtons) {
             System.out.println("Visible: " + socialMediaButton.getText());
         }
+        softAssert.assertAll();
     }
 }

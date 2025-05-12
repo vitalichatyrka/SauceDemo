@@ -20,5 +20,6 @@ public class CartTest extends BaseTest {
                 "SO BAAAAAD");
         assertTrue(cartPage.getProductsName().contains("Sauce Labs Backpack"));
         assertEquals(cartPage.getProductPrice("Sauce Labs Backpack"), 29.99);
+        softAssert.assertAll();
     }
 }
