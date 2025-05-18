@@ -9,6 +9,7 @@ public class ProductsPage extends BasePage {
     private static final By TITLE = By.cssSelector("[data-test=title]");
     private static final By CART_BUTTON = By.xpath("//*[@id=\"shopping_cart_container\"]/a");
     private static final String ADD_TO_CART_PATTERN = "//*[text() = '%s']/ancestor::div[@class = 'inventory_item']//button";
+
     public ProductsPage(WebDriver driver) {
         super(driver);
     }

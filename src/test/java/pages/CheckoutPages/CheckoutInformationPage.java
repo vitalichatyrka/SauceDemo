@@ -29,12 +29,15 @@ public class CheckoutInformationPage extends BasePage {
     public void enterPostalCode(String postalCode) {
         driver.findElement(ZIP_POSTAL_CODE).sendKeys(postalCode);
     }
+
     public void clickContinueButton() {
         driver.findElement(CONTINUE_BUTTON).click();
     }
+
     public void clickCancelButton() {
         driver.findElement(CANCEL_BUTTON).click();
     }
+
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }

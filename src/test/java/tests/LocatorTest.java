@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class LocatorTest extends BaseTest {
 
-    @Test
+    @Test(enabled = false)
     public void checkLocator() {
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name"));

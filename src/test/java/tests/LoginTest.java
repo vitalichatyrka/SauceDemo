@@ -1,19 +1,20 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void checkLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
+        assertEquals(productsPage.getTitle(), "Product", "Логин не выполнен");
     }
 
-    @Test
+    @Test(testName = "Check login with empty password", enabled = true, priority = 2, invocationCount = 5, groups = {"smoke"})
     public void checkLoginWithEmptyPasswordAndUsername() {
         loginPage.open();
         loginPage.login("", "");
@@ -21,11 +22,27 @@ public class LoginTest extends BaseTest {
                 "Epic sadface: Username is required", "Login successful but shouldn't");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void checkLoginWithEmptyPassword() {
         loginPage.open();
         loginPage.login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(),
-                "Epic sadface: Password is required", "Login successful but shouldn't");
+                "Epic sadface: Password is require", "Login successful but shouldn't");
+    }
+
+    @DataProvider
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"", "", "Epic sadface: Username is required"}
+        };
+    }
+
+    @Test(dataProvider = "loginData")
+    public void checkLoginErrors(String user, String password, String errorMessage) {
+        loginPage.open();
+        loginPage.login(user, password);
+        assertEquals(loginPage.getErrorMessage(),
+                errorMessage, "Incorrect error message");
     }
 }

@@ -17,6 +17,7 @@ public class CheckoutOverviewPage extends BasePage {
     public String getPageTitle() {
         return driver.findElement(TITLE_OF_CHECKOUT_OVERVIEW_PAGE).getText();
     }
+
     public boolean isTitleCorrect() {
         return getPageTitle().equals(NAME_OF_TITLE_OF_CHECKOUT_OVERVIEW_PAGE);
     }

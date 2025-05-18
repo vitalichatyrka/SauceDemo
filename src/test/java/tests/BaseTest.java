@@ -3,9 +3,8 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.CartPage;
 import pages.CheckoutPages.CheckoutInformationPage;
@@ -16,6 +15,7 @@ import pages.ProductsPage;
 import java.time.Duration;
 import java.util.Map;
 
+@Listeners(TestListener.class)
 public class BaseTest {
 
     WebDriver driver;
@@ -27,16 +27,22 @@ public class BaseTest {
     CheckoutInformationPage checkoutInformationPage;
     CheckoutOverviewPage checkoutOverviewPage;
 
+    @Parameters({"browser"})
     @BeforeMethod
-    public void setup() {
-        options = new ChromeOptions();
-        options.setExperimentalOption("prefs", Map.of(
-                "credentials_enable_service", false,
-                "profile.password_manager_enabled", false
-        ));
-        options.addArguments("--disable-features=PasswordManagerEnableLeakDetection,AutofillServerCommunication,PasswordCheck");
-        options.addArguments("--disable-blink-features=PasswordCredential,CredentialManagerAPI");
-        driver = new ChromeDriver(options);
+    public void setup(@Optional("chrome") String browser) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            options = new ChromeOptions();
+            options.setExperimentalOption("prefs", Map.of(
+                    "credentials_enable_service", false,
+                    "profile.password_manager_enabled", false
+            ));
+            options.addArguments("--disable-features=PasswordManagerEnableLeakDetection,AutofillServerCommunication,PasswordCheck");
+            options.addArguments("--disable-blink-features=PasswordCredential,CredentialManagerAPI");
+            driver = new ChromeDriver(options);
+        } else if (browser.equalsIgnoreCase("safari")) {
+            driver = new SafariDriver();
+        }
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         softAssert = new SoftAssert();
