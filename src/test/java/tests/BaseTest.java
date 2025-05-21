@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.CartPage;
@@ -14,6 +16,8 @@ import pages.ProductsPage;
 
 import java.time.Duration;
 import java.util.Map;
+
+import static tests.AllureUtils.takeScreenshot;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -28,8 +32,8 @@ public class BaseTest {
     CheckoutOverviewPage checkoutOverviewPage;
 
     @Parameters({"browser"})
-    @BeforeMethod
-    public void setup(@Optional("chrome") String browser) {
+    @BeforeMethod ( description = "Open browser")
+    public void setup(@Optional("chrome") String browser, ITestContext context) {
         if (browser.equalsIgnoreCase("chrome")) {
             options = new ChromeOptions();
             options.setExperimentalOption("prefs", Map.of(
@@ -53,14 +57,11 @@ public class BaseTest {
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
     }
 
-    @Test
-    public void checkLocator() {
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() {
-        if (driver != null) {
+    @AfterMethod(alwaysRun = true, description = "Closing browser")
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            takeScreenshot(driver);
+        }
             driver.quit();
         }
-    }
 }

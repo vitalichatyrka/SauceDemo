@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,7 +40,7 @@ public class CartPage extends BasePage {
         }
         return names;
     }
-
+    @Step("Getting price of product with name: {product} in the cart")
     public double getProductPrice(String product) {
         return Double.parseDouble(driver.findElement(
                         By.xpath(String.format(

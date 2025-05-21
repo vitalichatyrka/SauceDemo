@@ -1,5 +1,8 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,10 +11,13 @@ import static org.testng.Assert.assertEquals;
 public class LoginTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
+    @Epic("Authorization")
+    @Feature("Login page")
+    @Story("Success login")
     public void checkLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertEquals(productsPage.getTitle(), "Product", "Логин не выполнен");
+        assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 
     @Test(testName = "Check login with empty password", enabled = true, priority = 2, invocationCount = 5, groups = {"smoke"})
@@ -27,7 +33,7 @@ public class LoginTest extends BaseTest {
         loginPage.open();
         loginPage.login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(),
-                "Epic sadface: Password is require", "Login successful but shouldn't");
+                "Epic sadface: Password is required", "Login successful but shouldn't");
     }
 
     @DataProvider
