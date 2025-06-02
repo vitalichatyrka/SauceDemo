@@ -2,7 +2,9 @@ package pages.CheckoutPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
+import pages.ProductsPage;
 
 public class CheckoutInformationPage extends BasePage {
     private final By FIRST_NAME_FIELD = By.id("first-name"),
@@ -18,24 +20,42 @@ public class CheckoutInformationPage extends BasePage {
         super(driver);
     }
 
-    public void enterFirstName(String userName) {
+    @Override
+    public BasePage open() {
+        driver.get("https://www.saucedemo.com/checkout-step-one.html");
+        return this;
+    }
+
+    @Override
+    public CheckoutInformationPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                "//div[@class='header_secondary_container']//ancestor::span")));
+        return this;
+    }
+
+    public CheckoutInformationPage enterFirstName(String userName) {
         driver.findElement(FIRST_NAME_FIELD).sendKeys(userName);
+        return this;
     }
 
-    public void enterLastName(String lastName) {
+    public CheckoutInformationPage enterLastName(String lastName) {
         driver.findElement(LAST_NAME_FIELD).sendKeys(lastName);
+        return this;
     }
 
-    public void enterPostalCode(String postalCode) {
+    public CheckoutInformationPage enterPostalCode(String postalCode) {
         driver.findElement(ZIP_POSTAL_CODE).sendKeys(postalCode);
+        return this;
     }
 
-    public void clickContinueButton() {
+    public CheckoutOverviewPage clickContinueButton() {
         driver.findElement(CONTINUE_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 
-    public void clickCancelButton() {
+    public ProductsPage clickCancelButton() {
         driver.findElement(CANCEL_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getErrorMessage() {

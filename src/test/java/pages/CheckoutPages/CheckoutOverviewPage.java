@@ -14,6 +14,16 @@ public class CheckoutOverviewPage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public BasePage open() {
+        return null;
+    }
+
+    @Override
+    public BasePage isPageOpened() {
+        return null;
+    }
+
     public String getPageTitle() {
         return driver.findElement(TITLE_OF_CHECKOUT_OVERVIEW_PAGE).getText();
     }

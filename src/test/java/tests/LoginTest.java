@@ -9,25 +9,29 @@ public class LoginTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void checkLogin() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        assertEquals(productsPage.getTitle(), "Product", "Логин не выполнен");
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened();
+        assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 
-    @Test(testName = "Check login with empty password", enabled = true, priority = 2, invocationCount = 5, groups = {"smoke"})
+    @Test(testName = "Check login with empty password", enabled = true, priority = 2, groups = {"smoke"})
     public void checkLoginWithEmptyPasswordAndUsername() {
-        loginPage.open();
-        loginPage.login("", "");
+        loginPage.open()
+                .isPageOpened()
+                .login("", "");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Username is required", "Login successful but shouldn't");
     }
 
     @Test(retryAnalyzer = Retry.class)
     public void checkLoginWithEmptyPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(),
-                "Epic sadface: Password is require", "Login successful but shouldn't");
+                "Epic sadface: Password is required", "Login successful but shouldn't");
     }
 
     @DataProvider
@@ -40,8 +44,9 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "loginData")
     public void checkLoginErrors(String user, String password, String errorMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage.open()
+                .isPageOpened()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(),
                 errorMessage, "Incorrect error message");
     }
