@@ -2,11 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="2" name="Cross Browser test" parallel="tests">
     <test name="Chrome">
-        <groups>
-            <run>
-                <include name="smoke"/>
-            </run>
-        </groups>
         <classes>
             <class name="tests.LoginTest"/>
             <class name="tests.CartTest"/>

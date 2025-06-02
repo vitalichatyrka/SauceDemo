@@ -15,12 +15,14 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-    @Step ("Opening the login page")
+
+    @Step("Opening the login page")
     public void open() {
         driver.get(BASE_URL);
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
     }
-    @Step ("Login into system by the user with: name: {user} and password: {password)")
+
+    @Step("Login into system by the user with: name: {user} and password: {password)")
     public void login(String user, String password) {
         driver.findElement(USER_NAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);

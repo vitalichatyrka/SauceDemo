@@ -20,12 +20,12 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 
-    @Test(testName = "Check login with empty password", enabled = true, priority = 2, invocationCount = 5, groups = {"smoke"})
+    @Test(testName = "Check login with empty password", enabled = true, priority = 2)
     public void checkLoginWithEmptyPasswordAndUsername() {
         loginPage.open();
         loginPage.login("", "");
         assertEquals(loginPage.getErrorMessage(),
-                "Epic sadface: Username is required", "Login successful but shouldn't");
+                "Epic sadface: Username is required1", "Login successful but shouldn't");
     }
 
     @Test(retryAnalyzer = Retry.class)

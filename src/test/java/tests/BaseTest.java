@@ -32,7 +32,7 @@ public class BaseTest {
     CheckoutOverviewPage checkoutOverviewPage;
 
     @Parameters({"browser"})
-    @BeforeMethod ( description = "Open browser")
+    @BeforeMethod(description = "Open browser")
     public void setup(@Optional("chrome") String browser, ITestContext context) {
         if (browser.equalsIgnoreCase("chrome")) {
             options = new ChromeOptions();
@@ -47,6 +47,7 @@ public class BaseTest {
             driver = new SafariDriver();
         }
 
+        context.setAttribute("driver", driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         softAssert = new SoftAssert();
@@ -59,9 +60,11 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true, description = "Closing browser")
     public void tearDown(ITestResult result) {
-        if (ITestResult.FAILURE == result.getStatus()) {
-            takeScreenshot(driver);
-        }
+        if (driver != null) {
+            if (ITestResult.FAILURE == result.getStatus()) {
+                takeScreenshot(driver);
+            }
             driver.quit();
         }
+    }
 }
