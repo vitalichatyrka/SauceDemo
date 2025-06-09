@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import pages.config.Credentials;
 
@@ -47,6 +48,12 @@ public class CheckoutInformationTest extends BaseTest {
     }
 
     @Test
+    @Epic("Checkout flow")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Chatyrka")
+    @Description("Checking adding items to the cart")
+    @Flaky
+    @Link(name = "documentation", url = "https://www.saucedemo.com/")
     public void testEmptyLastNameShowsError() {
         loginPage.open()
                 .isPageOpened()
@@ -66,6 +73,8 @@ public class CheckoutInformationTest extends BaseTest {
     }
 
     @Test
+    @Epic("Checkout flow")
+    @Severity(SeverityLevel.NORMAL)
     public void testEmptyPostalCodeShowsError() {
         loginPage.open()
                 .isPageOpened()
@@ -85,6 +94,8 @@ public class CheckoutInformationTest extends BaseTest {
     }
 
     @Test
+    @Epic("Checkout flow")
+    @Severity(SeverityLevel.MINOR)
     public void testCancelButtonNavigatesBackToCart() {
         loginPage.open()
                 .isPageOpened()

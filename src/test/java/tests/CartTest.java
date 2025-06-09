@@ -1,10 +1,21 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 public class CartTest extends BaseTest {
 
     @Test
+    @Epic("Cart")
+    @Feature("Adding item to cart")
+    @Story("Displaying added items in the cart")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Chatyrka")
+    @Description("Checking adding items to the cart")
+    @Flaky
+    @Link(name = "documentation", url = "https://www.saucedemo.com/")
+    @TmsLink("TMS_1")
+    @Issue("TMS-11")
     public void addItemToCart() {
         loginPage.open()
                 .isPageOpened()

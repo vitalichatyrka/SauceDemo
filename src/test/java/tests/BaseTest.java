@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
+import org.openqa.selenium.safari.SafariDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.CartPage;
@@ -15,6 +17,8 @@ import pages.ProductsPage;
 
 import java.time.Duration;
 import java.util.HashMap;
+
+import static tests.AllureUtils.takeScreenshot;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -45,6 +49,7 @@ public class BaseTest {
         } else if (browser.equalsIgnoreCase("firefox")) {
             driver = new FirefoxDriver();
         }
+      
         context.setAttribute("driver", driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -56,9 +61,12 @@ public class BaseTest {
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    @AfterMethod(alwaysRun = true, description = "Closing browser")
+    public void tearDown(ITestResult result) {
         if (driver != null) {
+            if (ITestResult.FAILURE == result.getStatus()) {
+                takeScreenshot(driver);
+            }
             driver.quit();
         }
     }
