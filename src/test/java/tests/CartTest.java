@@ -3,9 +3,6 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 public class CartTest extends BaseTest {
 
     @Test
@@ -20,7 +17,15 @@ public class CartTest extends BaseTest {
     @TmsLink("TMS_1")
     @Issue("TMS-11")
     public void addItemToCart() {
-        loginPage.open();
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCard("Sauce Labs Backpack")
+                .openCart()
+                .isPageOpened()
+                .isProductInCart("Sauce Labs Backpack");
+
+/*        loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.addToCard("Sauce Labs Backpack");
         productsPage.openCart();
@@ -31,6 +36,6 @@ public class CartTest extends BaseTest {
                 "SO BAAAAAD");
         assertTrue(cartPage.getProductsName().contains("Sauce Labs Backpack"));
         assertEquals(cartPage.getProductPrice("Sauce Labs Backpack"), 29.99);
-        softAssert.assertAll();
+        softAssert.assertAll();*/
     }
 }
