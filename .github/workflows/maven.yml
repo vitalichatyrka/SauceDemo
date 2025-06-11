@@ -27,7 +27,7 @@ jobs:
       uses: abhi1693/setup-browser@v0.3.4
       with:
         browser: firefox
-        version: latest
+        version: 115.0
     - name: Run tests
       run: mvn clean test
     - name: Run cross browsers tests
