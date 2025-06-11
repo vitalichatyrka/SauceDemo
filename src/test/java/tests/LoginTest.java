@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
 
-    @Test(testName = "Check login with empty password", enabled = true, priority = 2, groups = {"smoke"})
+    @Test(testName = "Check login with empty password", enabled = true, priority = 2)
     public void checkLoginWithEmptyPasswordAndUsername() {
         loginPage.open()
                 .isPageOpened()
