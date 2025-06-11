@@ -30,6 +30,8 @@ public class BaseTest {
     CartPage cartPage;
     CheckoutInformationPage checkoutInformationPage;
     CheckoutOverviewPage checkoutOverviewPage;
+    String user = System.getProperty("user");
+    String password = System.getProperty("password");
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -59,6 +61,9 @@ public class BaseTest {
         cartPage = new CartPage(driver);
         checkoutInformationPage = new CheckoutInformationPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
+
+        System.out.println(user);
+        System.out.println(password);
     }
 
     @AfterMethod(alwaysRun = true, description = "Closing browser")

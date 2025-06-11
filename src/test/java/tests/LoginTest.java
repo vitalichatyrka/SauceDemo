@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
     public void checkLogin() {
         loginPage.open()
                 .isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .isPageOpened();
         assertEquals(productsPage.getTitle(), "Products", "Логин не выполнен");
     }
@@ -35,7 +35,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyPassword() {
         loginPage.open()
                 .isPageOpened()
-                .login("standard_user", "");
+                .login(user, "");
         assertEquals(loginPage.getErrorMessage(),
                 "Epic sadface: Password is required", "Login successful but shouldn't");
     }
