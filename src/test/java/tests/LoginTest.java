@@ -28,7 +28,7 @@ public class LoginTest extends BaseTest {
                 .isPageOpened()
                 .login("", "");
         assertEquals(loginPage.getErrorMessage(),
-                "Epic sadface: Username is required1", "Login successful but shouldn't");
+                "Epic sadface: Username is required", "Login successful but shouldn't");
     }
 
     @Test(retryAnalyzer = Retry.class)

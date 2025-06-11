@@ -1,10 +1,12 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Log4j2
 public class LoginPage extends BasePage {
 
     private final By USER_NAME_FIELD = By.id("user-name"),
@@ -24,11 +26,13 @@ public class LoginPage extends BasePage {
       
     @Step("Opening the login page")
     public LoginPage open() {
+        log.info("Opening login page {}", BASE_URL);
         driver.get(BASE_URL);
         return this;
     }
 
     public ProductsPage login(String user, String password) {
+        log.info("Login with user name: {}, last name: {}", user, password);
         driver.findElement(USER_NAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
@@ -36,6 +40,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage() {
+        log.info("Getting error message");
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE));
         return driver.findElement(ERROR_MESSAGE).getText();
     }
