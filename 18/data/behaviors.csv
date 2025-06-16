@@ -1,0 +1,5 @@
+"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
+"0","","0","","6","0","","0"
+"0","Authorization","0","Login page","1","0","Success login","0"
+"0","Checkout flow","0","","3","0","","0"
+"0","Cart","0","Adding item to cart","1","0","Displaying added items in the cart","0"
